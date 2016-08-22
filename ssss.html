@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+				border: 0;
+			}
+			body{
+				background: black;
+			}
+			.wrap {
+				width: 500px;
+				margin: 0 auto;
+				position: relative;
+			}
+			.yi,.er,.san,.yim,.erm,.sanm{
+				width: 400px;
+				height: 100px;
+				background: white;
+				text-align: center;
+				line-height: 100px;
+				border: 1px solid #000;
+			}
+			.er,.san{
+				display: none;
+			}
+			.yim{
+				position: absolute;
+				top: 0px;
+				left: 0;
+			}
+			.yis{
+				width: 400px;
+				height: 100px;
+				background: white;
+				text-align: center;
+				line-height: 100px;
+				border: 1px solid #000;
+				position: absolute;
+				top: 101px;
+				left: 0;
+				z-index: -10;
+				opacity: 0;
+			}
+			.ers{
+				width: 400px;
+				height: 100px;
+				background: white;
+				text-align: center;
+				line-height: 100px;
+				border: 1px solid #000;
+				position: absolute;
+				top: 202px;
+				left: 0;
+				z-index: -10;
+				opacity: 0;
+			}
+			.erm{
+				position: absolute;
+				top: 204px;
+				left: 0;
+				display: none;
+			}
+			.sanm{
+				position: absolute;
+				top: 306px;
+				left: 0;
+				display: none;
+			}
+			.con{
+				width: 400px;
+				height: 100px;
+				background: white;
+				text-align: center;
+				line-height: 100px;
+				border: 1px solid #000;
+				position: absolute;
+				left: 0;
+				top: 0;
+			}
+			@keyframes flip1 {
+				0% {
+					-webkit-transform: perspective(400px) rotate3d(1, 0, 0, 360deg);
+					transform-origin: bottom;
+					-webkit-transform-origin: bottom;
+					opacity: 1
+				}
+				50% {
+					-webkit-transform: perspective(400px) rotate3d(1, 0, 0, 270deg);
+					transform-origin: bottom;
+					-webkit-transform-origin: bottom;
+					opacity: 1;
+				}
+				100% {
+					-webkit-transform: perspective(400px) rotate3d(1, 0, 0, 180deg);
+					transform-origin: bottom;
+					-webkit-transform-origin: bottom;
+					opacity: 0;
+				}
+				
+			}
+			@keyframes flip2 {
+				0% {
+					-webkit-transform: perspective(400px) rotate3d(1, 0, 0 360deg);
+					transform-origin: bottom;
+					-webkit-transform-origin: bottom;
+					opacity: 0
+				}
+				50% {
+					-webkit-transform: perspective(400px) rotate3d(1, 0, 0, 270deg);
+					transform-origin: bottom;
+					-webkit-transform-origin: bottom;
+					opacity:0;
+				}
+				100% {
+					-webkit-transform: perspective(400px) rotate3d(1, 0, 0, 180deg);
+					transform-origin: bottom;
+					-webkit-transform-origin: bottom;
+					opacity: 1;
+				}
+			}
+			/*@keyframes flip3 {
+				0% {
+					-webkit-transform: perspective(400px) rotate3d(1, 0, 0 360deg) translateY(0px);
+					transform-origin: bottom;
+					-webkit-transform-origin: bottom;
+					opacity: 0
+				}
+				50% {
+					-webkit-transform: perspective(400px) rotate3d(1, 0, 0, 270deg) translateY(-50px);
+					transform-origin: bottom;
+					-webkit-transform-origin: bottom;
+					opacity:0;
+				}
+				100% {
+					-webkit-transform: perspective(400px) rotate3d(1, 0, 0, 180deg) translateY(-100px);
+					transform-origin: bottom;
+					-webkit-transform-origin: bottom;
+					opacity: 1;
+				}
+			}*/
+		</style>
+	</head>
+	<body>
+		<div class="wrap">
+			<div class="con">
+				<h1>开始</h1>
+			</div>
+			<div class="yi">
+				<h1>翻第一页</h1>
+			</div>
+			<div class="er">
+				<h1>第二页</h1>
+			</div>
+			<div class="san">
+				<h1>第三页</h1>
+			</div>	
+			<!-- <div class="yis">
+				<h1>第一页</h1>
+			</div>
+			<div class="ers">
+				<h1>第一页</h1>
+			</div>
+			<div class="yim"></div>
+			<div class="erm"></div>
+			<div class="sanm"></div> -->
+		</div>
+	</body>
+	<script src="jquery-3.0.0.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		$(".con").on("click",function(){
+			$(".yi").css('-webkit-animation', 'flip2 linear .5s both');
+			// $(".yim").css('-webkit-animation', 'flip1 linear .5s both');
+			$(".yi").children().css('transform', 'rotateX(180deg)');
+			$(".yi").css("z-index", "100");
+			// $(".yim").css("display", "none");
+		});
+		$(".yi").on("click",function(){
+			$(".er").css("display", "block");
+			$(".er").css('-webkit-animation', 'flip2 linear .5s both');
+			// $(".yi").css('-webkit-animation', 'flip3 linear .5s both');
+			$(".er").children().css('transform', 'rotateX(180deg)');
+			// $(".yis").css("opacity","1");
+		});
+		$(".er").on("click",function(){
+			$(".san").css("display", "block");
+			$(".san").css('-webkit-animation', 'flip2 linear .5s both');
+			// $(".san").css('-webkit-animation', 'flip2 linear .5s both');
+			$(".san").children().css('transform', 'rotateX(180deg)');
+			// $(".ers").css("opacity","1");
+			// $(".yim").css("display", "none");
+		});		
+	</script>
+</html>

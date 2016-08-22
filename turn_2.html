@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style type="text/css">
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    
+    @-webkit-keyframes turn-down {
+        0% {
+            -webkit-transform-origin: bottom;
+            -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 0deg);
+            transform: perspective(400px) rotate3d(1, 0, 0, 0deg);
+        }
+        100% {
+            -webkit-transform-origin: bottom;
+            -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -180deg);
+            transform: perspective(400px) rotate3d(1, 0, 0, -180deg);
+        }
+    }
+    
+    @-webkit-keyframes turn-down-first-half {
+        0% {
+            -webkit-transform-origin: bottom;
+            -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 0deg);
+            transform: perspective(400px) rotate3d(1, 0, 0, 0deg);
+        }
+        100% {
+            -webkit-transform-origin: bottom;
+            -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -90deg);
+            transform: perspective(400px) rotate3d(1, 0, 0, -90deg);
+        }
+    }
+    
+    @-webkit-keyframes turn-down-second-half {
+        0% {
+            -webkit-transform-origin: top;
+            -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
+            transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
+        }
+        100% {
+            -webkit-transform-origin: top;
+            -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 0deg);
+            transform: perspective(400px) rotate3d(1, 0, 0, 0deg);
+        }
+    }
+    
+    .wrap {
+        width: 400px;
+        height: 80px;
+        margin: 0 auto;
+        position: relative;
+    }
+    
+    .wrap>div {
+        width: 400px;
+        height: 80px;
+        /*border: 1px solid #ccc;*/
+        line-height: 80px;
+        text-align: center;
+        background-color: skyblue;
+        color: white;
+        display: none;
+    }
+    
+    .wrap>div:nth-of-type(1) {
+        display: block;
+    }
+    
+    .wrap .click {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    
+    .turn-down {
+        animation: turn-down 1s forwards;
+        /*backface-visibility:hidden;*/
+    }
+    
+    .turn-down-first-half {
+        animation: turn-down-first-half 0.6s  forwards;
+    }
+    
+    .turn-down-second-half {
+    	display:block !important;
+    	transform-origin: top;
+    	transform: rotateX(-90deg);
+        animation: turn-down-second-half 0.4s  linear 0.6s forwards;
+    }
+    
+    .turn-up {
+        -webkit-transform-origin: center;
+        -webkit-transform: rotate3d(1, 0, 0, -180deg);
+        transform: rotate3d(1, 0, 0, -180deg);
+    }
+    
+    .click {
+        background-color: black !important;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <div>我是第1页</div>
+        <div>我是第2页</div>
+        <div>我是第3页</div>
+        <div>我是第4页</div>
+        <div>我是第5页</div>
+        <div>我是第6页</div>
+        <div>我是第7页</div>
+        <div>我是第8页</div>
+        <div class="click"></div>
+    </div>
+</body>
+<script src="jquery-3.0.0.min.js"></script>
+<script type="text/javascript">
+var index = 0;
+var h = 0;
+var isClick = true;
+var len = $(".wrap div").length;
+//$(".click").on("click", function() {
+//  if (!isClick) {
+//      console.log("不能连续点击");
+//      return;
+//  }
+//  isClick = false;
+//  if (index == len - 3) {
+//      $(".click").addClass("turn-down-first-half");
+//      $(".wrap div").eq(index + 1).addClass("turn-down-second-half");
+//  } else {
+//      $(".click").addClass("turn-down");
+//
+//  }
+//  h += $(".wrap div").eq(index).height();
+//
+//  setTimeout(function() {
+//      isClick = true;
+//      $(".wrap div").eq(index + 1).show();
+//      $(".click").removeClass("turn-down");
+//      $(".click").css({
+//          "top": h
+//      });
+//      index++;
+//      if (index == len - 2) {
+//          $(".click").hide();
+//      }
+//  }, 1000);
+//
+//})
+
+function turn() {
+    if (index == len - 3) {
+        $(".click").addClass("turn-down-first-half");
+        $(".wrap div").eq(index + 1).addClass("turn-down-second-half");
+         $(". ").eq(index + 1).addClass("turn-down-second-half");
+        return;
+    } else {
+        $(".click").addClass("turn-down");
+    }
+    h += $(".wrap div").eq(index).height();
+
+    setTimeout(function() {
+        // isClick = true;
+        $(".wrap div").eq(index + 1).show();
+        $(".click").removeClass("turn-down");
+        $(".click").css({
+            "top": h
+        });
+        index++;
+        if (index == len - 2) {
+            $(".click").hide();
+        } else {
+            setTimeout(function() {
+                turn();
+            }, 50);
+        }
+    }, 500);
+}
+turn();
+</script>
+
+</html>
